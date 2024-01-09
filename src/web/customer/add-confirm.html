@@ -3,16 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>案件情報入力</title>
+    <title>新規顧客情報確認画面</title>
     <!-- Bootstrap CSSの読み込み -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 </head>
 <body>
     <div class="container mt-5">
         <!-- ここにHTMLを書く -->
+        <h2>入力内容確認</h2>
+        <div id="confirm-data">
+            <!-- ここに入力内容が表示される -->
+
+
+        </div>
+        <p>上記の入力内容で登録してよろしいですか？</p>
+        <!--12/25追加　９KM 「はい」押下で"submitForm()関数発動-->
+        <button type="button" id="confirm-btn" class="btn btn-primary" >確定</button> 
+        <!--12/25追加　９KM 「いいえ」押下でgoBack()関数発動-->
+        <!-- <button type="button" class="btn btn-secondary" onclick="goBack()">いいえ</button> -->
+
+
     </div>
     <script type="module">
-        <!-- ここにJSを書く -->
+    
+        // ここにJSを書く 
+        //LocalStorageからデータを取得して表示
+            document.addEventListener('DOMContentLoaded', function () {
+                const confirmDataDiv = document.getElementById('confirm-data');
+                const keys = ['companyName', 'industry', 'contact', 'location'];
+
+                keys.forEach(key => {
+                    const value = localStorage.getItem(key);
+                    if (value) {
+                        const p = document.createElement('p');
+                        p.textContent = `${key}: ${value}`;
+                        confirmDataDiv.appendChild(p);
+                    }
+                });
+            });
+
+        //確定ボタンの処理
+                document.getElementById('confirm-btn').addEventListener('click', function () {
+                    alert('登録が完了しました');
+                    window.location.href = 'list.html'; // list.htmlへ遷移
+                });
+       
+
+
+         
+            
+
+
+       
     </script>
     <!-- BootstrapのJavaScriptの読み込み -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>

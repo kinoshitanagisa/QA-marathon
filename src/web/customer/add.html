@@ -27,11 +27,22 @@
                 <label for="location">所在地:</label>
                 <input type="text" class="form-control" id="location" name="location" required>
             </div>
-            <button type="submit" class="btn btn-primary">送信</button>
+           <button type="submit" class="btn btn-primary">確認</button> 　<!--12/25追加　９KM-->
+
+          <!-- <button type="submit" class="btn btn-primary">送信</button> -->
+
+            <!--<button type="submit" class="btn btn-primary">送信</button> --> <!--12/25削除　９KM-->
+            
         </form>
     </div>
     <script type="module">
-        import config from '../config.js';
+
+
+         import config from '../config.js';
+
+   
+            
+    
 
         document.getElementById('customer-form').addEventListener('submit', function(e) {
             e.preventDefault();
@@ -45,7 +56,13 @@
             }).then(response => response.json())
               .then(data => {
                 if(data.success) {
-                    alert('顧客情報が正常に保存されました。');
+                    //localストレージに保存する処理
+                     for (const [key, value] of formData.entries()) {
+                        localStorage.setItem(key, value);
+                    }
+                    // 9KM add-confirm.htmlにリダイレクト
+                    window.location.href = 'add-confirm.html';
+
                     // フォームをリセット
                     document.getElementById('customer-form').reset();
                 } else {
@@ -53,7 +70,12 @@
                 }
               })
               .catch(error => console.error('Error:', error));
-        });
+        }); 
+        
+
+
+
+       
     </script>
     <!-- BootstrapのJavaScriptの読み込み -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
@@ -61,3 +83,9 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
 </html>
+
+
+
+
+
+
